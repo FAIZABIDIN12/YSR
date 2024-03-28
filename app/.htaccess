@@ -1,0 +1,14 @@
+# Disable directory listing
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+    # Jika mod_rewrite tidak tersedia, kirim semua 404 ke index.php
+    ErrorDocument 404 /index.php
+</IfModule>
